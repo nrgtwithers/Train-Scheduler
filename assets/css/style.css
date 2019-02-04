@@ -1,11 +1,12 @@
 html, body{
-    background-image: url("/assets/images/train.jpg");
+    background-color:grey;
     color: black;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
 .header{
     text-align: center;
+    color: #ffffff;
 }
 
 .container{
@@ -13,4 +14,9 @@ html, body{
     color: black;
     /* background-color: grey; */
     margin: auto;
+}
+
+label{
+    color:white !important;
+    font-weight: bold;
 }
