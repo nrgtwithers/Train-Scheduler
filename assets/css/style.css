@@ -20,3 +20,7 @@ label{
     color:white !important;
     font-weight: bold;
 }
+
+textarea.materialize-textarea{
+    color: white !important;
+}
