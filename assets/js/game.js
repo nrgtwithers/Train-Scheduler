@@ -7,8 +7,9 @@ var config = {
     projectId: "distributed-eye-226422",
     storageBucket: "distributed-eye-226422.appspot.com",
     messagingSenderId: "439695275055"
-  };
-  firebase.initializeApp(config);
+};
+
+firebase.initializeApp(config);
 
 var database = firebase.database();
 
@@ -19,45 +20,69 @@ var frequency = "";
 var next_arrival = "";
 var minutes_away = "";
 
- // Add Train Button Click
- $("#add-train").on("click", function(event) {
+// Add Train Button Click
+$("#add-train").on("click", function (event) {
     event.preventDefault();
 
     // Train form values
     train_name = $("#train_name").val().trim();
     destination = $("#destination").val().trim();
     frequency = $("#frequency").val().trim();
-    minutes_away = $("#minutes_away").val().trim();
+    first_train = $("#first_train").val().trim();
 
-    // Creating the values within database
-    database.ref().set({
+    var train_input = {
         train_name: train_name,
         destination: destination,
         frequency: frequency,
-        next_arrival: next_arrival,
-        minutes_away: minutes_away
-      });
- });
+        first_train: first_train
+    }
 
-     // Firebase watcher + initial loader
-     database.ref().on("value", function(snapshot) {
+    if (train_name === '' || destination === '' || frequency === '' || first_train === '') {
+        alert('Please fill out form completely.')
+    } else {
+        console.log(train_input)
+        // Creating the values within database
+        database.ref().push(train_input);
+    }
 
-        // Console log test for to make sure data is going thru properly
-        console.log(snapshot.val());
-        console.log(snapshot.val().train_name);
-        console.log(snapshot.val().destination);
-        console.log(snapshot.val().frequency);
-        // console.log(snapshot.val().next_arrival);
-        console.log(snapshot.val().minutes_away);
-  
-        // Change the HTML to reflect
-        $("#new-trainname").text(snapshot.val().train_name);
-        $("#new-destination").text(snapshot.val().destination);
-        $("#new-frequency").text(snapshot.val().frequency);
-        // $("#new-nextarrival").text(snapshot.val().next_arrival);
-        $("#new-minutesaway").text(snapshot.val().minutes_away);
-  
-        // Handle the errors
-      }, function(errorObject) {
-        console.log("Errors handled: " + errorObject.code);
-      });
+});
+
+// Firebase watcher + initial loader
+database.ref().on("child_added", function (snapshot) {
+    var train_data = snapshot.val()
+
+    // Console log test for to make sure data is going thru properly
+    console.log(train_data.train_name);
+    console.log(train_data.destination);
+    console.log(train_data.frequency);
+    console.log(train_data.first_train);
+
+    var first_train = moment(train_data.first_train, `HH:mm`);
+    console.log(first_train)
+
+    var difference = moment().diff(moment(first_train), `minutes`);
+
+    var timeRemaining = difference%train_data.frequency;
+
+    var minutes_away = train_data.frequency - timeRemaining;
+
+    var next_arrival = moment().add(minutes_away, `minutes`);
+
+    next_arrival = moment(next_arrival).format(`h:mm A`);
+
+    // Change the HTML to reflect
+    var train_info = `
+    <tr>
+    <td>${train_data.train_name}</td>
+    <td>${train_data.destination}</td>
+    <td>${train_data.frequency}</td>
+    <td>${next_arrival}</td>
+    <td>${minutes_away}</td>
+    </tr>
+    `
+    $(`#new_data`).append(train_info);
+
+    // Handle the errors
+}, function (errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+});

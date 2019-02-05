@@ -15,7 +15,7 @@
     <!-- jQuery CDN-->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- LINK TO FIREBASE GOES HERE -->
-    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 </head>
 
 <body>
@@ -39,14 +39,7 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
-                                <tr>
-                                    <td id="new-trainname"></td>
-                                    <td id="new-destination"></td>
-                                    <td id="new-frequency"></td>
-                                    <td id="new-nextarrival"></td>
-                                    <td id="new-minutesaway"></td>
-                                </tr>
+                            <tbody id="new_data">
                             </tbody>
                         </table>
                     </div>
@@ -60,40 +53,43 @@
                         <span class="card-title">Add Train</span>
                         <div class="row">
                             <form class="col s12 add-train">
-                              <div class="row">
-                                <div class="input-field col s12">
-                                  <textarea id="train_name" class="materialize-textarea"></textarea>
-                                  <label for="textarea1">Train Name:</label>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="train_name" class="materialize-textarea"></textarea>
+                                        <label for="textarea1">Train Name:</label>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="row">
-                                <div class="input-field col s12">
-                                  <textarea id="destination" class="materialize-textarea"></textarea>
-                                  <label for="textarea1">Destination:</label>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="destination" class="materialize-textarea"></textarea>
+                                        <label for="textarea1">Destination:</label>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="row">
-                                <div class="input-field col s12">
-                                  <textarea id="frequency" class="materialize-textarea"></textarea>
-                                  <label for="textarea1">First Train Time (HH:mm - military time):</label>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="first_train" class="materialize-textarea"></textarea>
+                                        <label for="textarea1">First Train Time (HH:mm - military time):</label>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="row">
-                                <div class="input-field col s12">
-                                  <textarea id="frequency" class="materialize-textarea"></textarea>
-                                  <label for="textarea1">Frequency(min):</label>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="frequency" class="materialize-textarea"></textarea>
+                                        <label for="textarea1">Frequency(min):</label>
+                                    </div>
                                 </div>
-                              </div>
-                              <button id="add-train" class="btn waves-effect #b0bec5 blue-grey lighten-3  waves-light" type="submit" name="action">Submit
-                                <i class="material-icons right">send</i>
-                              </button>
+                                <button id="add-train" class="btn waves-effect #b0bec5 blue-grey lighten-3  waves-light"
+                                    type="submit" name="action">Submit
+                                    <i class="material-icons right">send</i>
+                                </button>
                             </form>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Moment JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- GAME.JS  -->
