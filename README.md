@@ -13,7 +13,7 @@ This app was created utilizing Firebase's Real Time Database. The train schedule
 1. It will then show the Next Arrival and Minutes Away categories.
 1. It will update everytime you refresh the app as well.
 
-Click [here](https://nrgtwithers.github.io/Train-Scheduler/) to see the live version of this app.
+**Click [here](https://nrgtwithers.github.io/Train-Scheduler/) to see the live version of this app.**
 
 #### Technologies used
 
